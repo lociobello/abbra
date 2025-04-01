@@ -42,7 +42,7 @@ function draw() {
   for (let i = 0; i < charArray.length; i++) {
     let char = charArray[i] === " " ? "&nbsp;" : charArray[i]; // Replace spaces with non-breaking spaces
     let noiseFactor = noise(i * 1, frameCount * 0.05); // Add Perlin noise for randomness
-    smoothLevels[i] = lerp(smoothLevels[i], micLevel * noiseFactor, 0.2); // Smooth variation to reduce jitter
+    smoothLevels[i] = lerp(smoothLevels[i], micLevel * noiseFactor, 0.1); // Smooth variation to reduce jitter
     let charSize = map(smoothLevels[i], 0, 0.02, baseSize, maxSize);
     let charWeight = map(smoothLevels[i], 0, 0.02, baseWeight, maxWeight);
     let charOpticalSize = map(smoothLevels[i], 0, 0.02, baseOpticalSize, maxOpticalSize);
