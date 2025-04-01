@@ -2,6 +2,8 @@ let mic;
 let font;
 let textString = "who wants a loan?";
 let textContainer;
+let micStarted = false; // Track if the mic has been started
+let startButton;
 
 function preload() {
   font = loadFont("assets/InterVariable.ttf");
@@ -10,7 +12,6 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   mic = new p5.AudioIn();
-  mic.start();
 
   // Create an HTML element for the text
   textContainer = createDiv(textString);
@@ -21,10 +22,35 @@ function setup() {
   textContainer.style("transform", "translate(-50%, -50%)");
   textContainer.style("text-align", "center");
   textContainer.style("white-space", "nowrap");
+
+  // Create a button to start the microphone
+  startButton = createButton("Start Microphone");
+  startButton.position(width / 2 - 50, (height / 4) * 3);
+  startButton.mousePressed(startMic);
+
+  // Ensure the button is visible and mic is reset on reload
+  micStarted = false;
+  startButton.show();
+}
+
+function startMic() {
+  // Resume the audio context to ensure microphone works after reload
+  getAudioContext()
+    .resume()
+    .then(() => {
+      mic.start();
+      micStarted = true;
+      startButton.hide(); // Hide the button after starting the mic
+    });
 }
 
 function draw() {
   background(214, 255, 161);
+
+  if (!micStarted) {
+    return; // Do nothing until the mic is started
+  }
+
   let micLevel = pow(mic.getLevel(), 0.6); // Apply a nonlinear mapping to amplify low volume effects
 
   let baseSize = 50;
