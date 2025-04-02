@@ -1,12 +1,12 @@
 let mic;
 let font;
-let textString = "who wants a loan?";
+let textString = "abbra cadabra";
 let textContainer;
 let micStarted = false; // Track if the mic has been started
 let startButton;
 
 function preload() {
-  font = loadFont("assets/InterVariable.ttf");
+  font = loadFont("assets/Abbra_01032025-abbravariableVF.ttf");
 }
 
 function setup() {
@@ -15,7 +15,7 @@ function setup() {
 
   // Create an HTML element for the text
   textContainer = createDiv(textString);
-  textContainer.style("font-family", "InterVariable");
+  textContainer.style("font-family", "Abbra_01032025"); // Use the font name directly
   textContainer.style("position", "absolute");
   textContainer.style("top", "50%");
   textContainer.style("left", "50%");
